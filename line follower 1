@@ -1,0 +1,31 @@
+#!/usr/bin/env pybricks-micropython
+from pybricks.hubs import EV3Brick
+from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
+                                 InfraredSensor, UltrasonicSensor, GyroSensor)
+from pybricks.parameters import Port, Stop, Direction, Button, Color
+from pybricks.tools import wait, StopWatch, DataLog
+from pybricks.robotics import DriveBase
+from pybricks.media.ev3dev import SoundFile, ImageFile
+
+
+# This program requires LEGO EV3 MicroPython v2.0 or higher.
+# Click "Open user guide" on the EV3 extension tab for more information.
+
+
+# Create your objects here.
+ev3 = EV3Brick()
+
+
+# Write your program here.
+ev3.speaker.beep()
+
+a_motor = Motor(Port.A)
+d_motor = Motor(Port.D)
+cs1 = ColorSensor(Port.1)
+
+center = 35
+power = 30
+
+while True:
+    a_motor.on((((cs1.reflectecd_light_intensity - center) /3) + power) * 2.5)
+    d_motor.on((((cs1.reflectecd_light_intensity - center) /-3) + power) * 2.5)
